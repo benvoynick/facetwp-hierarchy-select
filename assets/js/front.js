@@ -12,13 +12,12 @@
 
     FWP.hooks.addFilter('facetwp/selections/hierarchy_select', function(output, params) {
         var selected_values = [];
-        params.el.find('.facetwp-hierarchy_select option:selected').each(function(i) {
-            var value = $(this).attr('value');
-            var text = $(this).text().replace(/\([0-9]+\)$/, '');
-            if (value.length) {
-                selected_values.push({ value: value, label: text });
-            }
-        });
+        var lowest_selected_child = params.el.find('.facetwp-hierarchy_select option:selected').not('[value=""]').last();
+        if (lowest_selected_child.length) {
+          var value = $(lowest_selected_child).attr('value');
+          var text = $(lowest_selected_child).text().replace(/\([0-9]+\)$/, '');
+          selected_values.push({ value: value, label: text });
+        }
         return selected_values;
     });
 
