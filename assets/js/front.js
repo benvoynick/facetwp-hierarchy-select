@@ -14,8 +14,9 @@
         var selected_values = [];
         params.el.find('.facetwp-hierarchy_select option:selected').each(function(i) {
             var value = $(this).attr('value');
+            var text = $(this).text().replace(/\([0-9]+\)$/, '');
             if (value.length) {
-                selected_values.push({ value: value, label: $(this).text() });
+                selected_values.push({ value: value, label: text });
             }
         });
         return selected_values;
